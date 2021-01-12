@@ -38,5 +38,5 @@ interface LinkDatabaseDao {
     suspend fun clear()
 
     @Query("SELECT * FROM links_table ORDER BY ID DESC")
-    fun getAllNights(): LiveData<List<LinkSave>>
+    fun getAllLinks(): LiveData<List<LinkSave>>
 }
