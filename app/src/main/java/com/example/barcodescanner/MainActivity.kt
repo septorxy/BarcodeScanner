@@ -9,16 +9,16 @@ import com.google.zxing.integration.android.IntentIntegrator
 
 
 class MainActivity : AppCompatActivity() {
-
+    //val dataSource = LinkDatabase.getInstance(application).linkDatabaseDao
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
 
     override fun onActivityResult(
-        requestCode: Int,
-        resultCode: Int,
-        data: Intent?
+            requestCode: Int,
+            resultCode: Int,
+            data: Intent?
     ) {
         Log.d("Main", "Entered")
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Log.d("Main", "Scanned")
                 Toast.makeText(this, "Scanned -> " + result.contents, Toast.LENGTH_SHORT).show()
-
+                //HistoryViewModel(dataSource, application).onScan(result.contents)
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data)

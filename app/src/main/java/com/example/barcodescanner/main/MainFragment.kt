@@ -1,4 +1,4 @@
-package com.example.barcodescanner
+package com.example.barcodescanner.main
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
-import com.example.barcodescanner.databinding.FragmentTitleBinding
+import com.example.barcodescanner.R
+import com.example.barcodescanner.databinding.FragmentMainBinding
 import com.google.zxing.integration.android.IntentIntegrator
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,7 +23,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [TitleFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class TitleFragment : Fragment() {
+class MainFragment : Fragment() {
     lateinit var btnBarcode: Button
     lateinit var textView: TextView
 
@@ -31,9 +32,9 @@ class TitleFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+    Log.d("Main", "Ent")
         // Inflate the layout for this fragment
-        val binding = DataBindingUtil.inflate<FragmentTitleBinding>(inflater, R.layout.fragment_title, container,false)
+        val binding = DataBindingUtil.inflate<FragmentMainBinding>(inflater, R.layout.fragment_main, container, false)
         btnBarcode = binding.button
         textView = binding.txtContent
         btnBarcode.setOnClickListener {
@@ -56,28 +57,7 @@ class TitleFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.
-        onNavDestinationSelected(item,requireView().findNavController())
+        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
     }
-
-
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment TitleFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic fun newInstance(param1: String, param2: String) =
-//                TitleFragment().apply {
-//                    arguments = Bundle().apply {
-//                        putString(ARG_PARAM1, param1)
-//                        putString(ARG_PARAM2, param2)
-//                    }
-//                }
-//    }
 }
