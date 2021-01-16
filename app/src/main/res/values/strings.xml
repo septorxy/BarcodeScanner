@@ -7,4 +7,7 @@
     <string name="history">History</string>
     <string name="about_text">To use the app simply scan a barcode. All barcodes are backed up to a database to be accessed later. \n\nThis app is designed by Liam Gatt for his MAD project at WPUT.</string>
     <string name="history_text">The History will go here</string>
+    <string name="title"><![CDATA[<h3>Your past scanned links can be found here</h3>]]></string>
+    <string name="time"><![CDATA[<b>Date Scanned:</b>]]></string>
+    <string name="clear">Clear</string>
 </resources>

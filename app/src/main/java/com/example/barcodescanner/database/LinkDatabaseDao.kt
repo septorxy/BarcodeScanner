@@ -27,16 +27,10 @@ import androidx.room.Update
 interface LinkDatabaseDao {
     @Insert
     suspend fun insert(link: LinkSave)
-
     @Update
-    suspend fun update(link: LinkSave)
-
-    @Query("SELECT * from links_table WHERE ID = :key")
     suspend fun get(key: Long): LinkSave?
-
     @Query("DELETE FROM links_table")
     suspend fun clear()
-
     @Query("SELECT * FROM links_table ORDER BY ID DESC")
     fun getAllLinks(): LiveData<List<LinkSave>>
 }
