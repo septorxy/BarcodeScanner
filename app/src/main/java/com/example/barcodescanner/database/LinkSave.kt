@@ -27,5 +27,5 @@ data class LinkSave(
         @ColumnInfo(name = "link_url")
         var linkURL: String = "",
         @ColumnInfo(name = "time_scanned")
-        var timeScanned: Long = System.currentTimeMillis(),
+        var time: Long = System.currentTimeMillis(),
 )
