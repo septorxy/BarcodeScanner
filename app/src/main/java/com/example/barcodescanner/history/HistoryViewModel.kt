@@ -10,8 +10,9 @@ import com.example.barcodescanner.formatLinks
 import kotlinx.coroutines.launch
 
 class HistoryViewModel(
-        val database: LinkDatabaseDao,
-        application: Application) : AndroidViewModel(application) {
+    val database: LinkDatabaseDao,
+    application: Application
+) : AndroidViewModel(application) {
 
     private val links = database.getAllLinks()
 
@@ -29,7 +30,7 @@ class HistoryViewModel(
         database.clear()
     }
 
-    fun insertNew(url: String){
+    fun insertNew(url: String) {
         viewModelScope.launch {
             val linkSave = LinkSave()
             linkSave.linkURL
@@ -37,10 +38,9 @@ class HistoryViewModel(
         }
     }
 
-    private suspend fun insert(linkSave: LinkSave){
+    private suspend fun insert(linkSave: LinkSave) {
         database.insert(linkSave)
     }
-
 
 
 }

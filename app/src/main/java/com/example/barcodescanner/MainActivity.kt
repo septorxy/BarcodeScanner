@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 
-class MainActivity : AppCompatActivity(), MyInterface  {
+class MainActivity : AppCompatActivity(), MyInterface {
     private var results = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

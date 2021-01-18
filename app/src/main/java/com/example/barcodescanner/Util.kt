@@ -26,8 +26,9 @@ fun formatLinks(nights: List<LinkSave>, resources: Resources): Spanned {
         return HtmlCompat.fromHtml(sb.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY)
     }
 }
-    @SuppressLint("SimpleDateFormat")
-    fun convertLongToDateString(systemTime: Long): String {
-        return SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm")
-                .format(systemTime).toString()
-    }
+
+@SuppressLint("SimpleDateFormat")
+fun convertLongToDateString(systemTime: Long): String {
+    return SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm")
+        .format(systemTime).toString()
+}

@@ -1,6 +1,6 @@
 package com.example.barcodescanner
 
-public interface MyInterface {
+interface MyInterface {
     fun setResults(results: String)
     fun getResults(): String
 }

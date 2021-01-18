@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.barcodescanner.database.LinkDatabaseDao
 
 class HistoryViewModelFactory(
-        private val dataSource: LinkDatabaseDao,
-        private val application: Application) : ViewModelProvider.Factory {
+    private val dataSource: LinkDatabaseDao,
+    private val application: Application
+) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(HistoryViewModel::class.java)) {

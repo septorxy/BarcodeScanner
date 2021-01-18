@@ -16,18 +16,8 @@ import com.google.zxing.integration.android.IntentIntegrator
 
 
 class MainFragment : Fragment() {
-
-//    val application = requireNotNull(this.activity).application
-//    val dataSource = LinkDatabase
-//        .getInstance(application)
-//        .linkDatabaseDao
     lateinit var btnBarcode: Button
     lateinit var txt: TextView
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     private var mi: MyInterface? = null
 
@@ -79,11 +69,7 @@ class MainFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         txt.text = mi!!.getResults()
-        val str = txt.text.toString()
-//        insertIntoDB(str)
+//        val str = txt.text.toString()
     }
 
-//    fun insertIntoDB(URL: String){
-//        HistoryViewModel(dataSource, application).insertNew(URL)
-//    }
 }
