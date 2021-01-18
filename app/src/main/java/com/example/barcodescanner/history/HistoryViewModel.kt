@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 class HistoryViewModel(
         val database: LinkDatabaseDao,
         application: Application) : AndroidViewModel(application) {
-            private val links = database.getAllLinks()
+
+    private val links = database.getAllLinks()
 
     val LinkString = Transformations.map(links) { links ->
         formatLinks(links, application.resources)
@@ -28,11 +29,18 @@ class HistoryViewModel(
         database.clear()
     }
 
-    fun onScan(link : String){
+    fun insertNew(url: String){
         viewModelScope.launch {
-            val newLink = LinkSave()
-            newLink.linkURL = link
-            database.insert(newLink)
+            val linkSave = LinkSave()
+            linkSave.linkURL
+            insert(linkSave)
         }
     }
+
+    private suspend fun insert(linkSave: LinkSave){
+        database.insert(linkSave)
+    }
+
+
+
 }

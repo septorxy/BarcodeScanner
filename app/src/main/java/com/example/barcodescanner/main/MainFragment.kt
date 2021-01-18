@@ -9,36 +9,51 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import com.example.barcodescanner.MyInterface
 import com.example.barcodescanner.R
 import com.example.barcodescanner.databinding.FragmentMainBinding
 import com.google.zxing.integration.android.IntentIntegrator
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [TitleFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MainFragment : Fragment() {
+
+//    val application = requireNotNull(this.activity).application
+//    val dataSource = LinkDatabase
+//        .getInstance(application)
+//        .linkDatabaseDao
     lateinit var btnBarcode: Button
-    lateinit var textView: TextView
+    lateinit var txt: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    Log.d("Main", "Ent")
+    private var mi: MyInterface? = null
+
+    override fun onAttach(context: android.content.Context) {
+        super.onAttach(requireContext())
+        mi = context as MyInterface?
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        Log.d("Main", "onCreateView")
         // Inflate the layout for this fragment
-        val binding = DataBindingUtil.inflate<FragmentMainBinding>(inflater, R.layout.fragment_main, container, false)
+        val binding = DataBindingUtil.inflate<FragmentMainBinding>(
+            inflater,
+            R.layout.fragment_main,
+            container,
+            false
+        )
         btnBarcode = binding.button
-        textView = binding.txtContent
+        txt = binding.txtContent
+
         btnBarcode.setOnClickListener {
-            val intentIntegrator = IntentIntegrator(activity)
+            val intentIntegrator = IntentIntegrator(this.activity)
             intentIntegrator.setBeepEnabled(false)
             intentIntegrator.setCameraId(0)
             intentIntegrator.setBarcodeImageEnabled(false)
@@ -47,7 +62,7 @@ class MainFragment : Fragment() {
         }
         //https://zxing.github.io/zxing/apidocs/com/google/zxing/integration/android/IntentIntegrator.html
         setHasOptionsMenu(true)
-        Log.d("Main", "here")
+
         return binding.root
     }
 
@@ -60,4 +75,15 @@ class MainFragment : Fragment() {
         return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
                 || super.onOptionsItemSelected(item)
     }
+
+    override fun onResume() {
+        super.onResume()
+        txt.text = mi!!.getResults()
+        val str = txt.text.toString()
+//        insertIntoDB(str)
+    }
+
+//    fun insertIntoDB(URL: String){
+//        HistoryViewModel(dataSource, application).insertNew(URL)
+//    }
 }

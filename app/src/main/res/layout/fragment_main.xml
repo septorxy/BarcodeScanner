@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout>
+<data>
+    <variable
+        name="mainFragment"
+        type="com.example.barcodescanner.main.MainFragment" />
 
+</data>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/relativeLayout"
@@ -17,7 +22,7 @@
             android:layout_below="@id/button"
             android:layout_centerInParent="true"
             android:layout_marginBottom="10dp"
-            android:text="code reader"
+            android:text=""
             android:textSize="16sp"
             android:textStyle="bold" />
 
