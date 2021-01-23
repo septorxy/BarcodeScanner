@@ -30,6 +30,7 @@ interface LinkDatabaseDao {
     @Query("DELETE FROM links_table")
     suspend fun clear()
 
-    @Query("SELECT * FROM links_table ORDER BY ID DESC")
+    @Query("SELECT * FROM links_table")
     fun getAllLinks(): LiveData<List<LinkSave>>
+
 }

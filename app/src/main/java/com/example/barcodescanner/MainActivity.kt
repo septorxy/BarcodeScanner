@@ -45,10 +45,4 @@ class MainActivity : AppCompatActivity(), MyInterface {
         return results
     }
 
-
-//    @JvmName("getResults1")
-//    fun getResults(): String{
-//        return results
-//    }
-
 }

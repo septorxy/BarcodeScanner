@@ -3,8 +3,8 @@
 <layout>
 <data>
     <variable
-        name="mainFragment"
-        type="com.example.barcodescanner.main.MainFragment" />
+        name="mainViewModel"
+        type="com.example.barcodescanner.main.MainViewModel" />
 
 </data>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"

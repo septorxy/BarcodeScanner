@@ -5,15 +5,17 @@ import android.content.res.Resources
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import android.util.Log
 import androidx.core.text.HtmlCompat
 import com.example.barcodescanner.database.LinkSave
 import java.text.SimpleDateFormat
 
-fun formatLinks(nights: List<LinkSave>, resources: Resources): Spanned {
+fun formatLinks(links: List<LinkSave>, resources: Resources): Spanned {
     val sb = StringBuilder()
+    Log.d("Main","formatLinks")
     sb.apply {
         append(resources.getString(R.string.title))
-        nights.forEach {
+        links.forEach {
             append("<br>")
             append(resources.getString(R.string.time))
             append("\t${convertLongToDateString(it.timeScanned)}<br>")
@@ -29,6 +31,5 @@ fun formatLinks(nights: List<LinkSave>, resources: Resources): Spanned {
 
 @SuppressLint("SimpleDateFormat")
 fun convertLongToDateString(systemTime: Long): String {
-    return SimpleDateFormat("EEEE MMM-dd-yyyy' Time: 'HH:mm")
-        .format(systemTime).toString()
+    return SimpleDateFormat("EEEE dd-MM-yyyy' Time: 'HH:mm").format(systemTime).toString()
 }

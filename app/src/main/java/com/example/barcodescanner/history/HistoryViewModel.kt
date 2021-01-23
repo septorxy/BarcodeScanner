@@ -1,7 +1,10 @@
 package com.example.barcodescanner.history
 
 import android.app.Application
+import android.text.Spanned
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.barcodescanner.database.LinkDatabaseDao
@@ -14,11 +17,21 @@ class HistoryViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    private val links = database.getAllLinks()
+    lateinit var links: LiveData<List<LinkSave>>
+    lateinit var linkString: LiveData<Spanned>
 
-    val LinkString = Transformations.map(links) { links ->
-        formatLinks(links, application.resources)
+    init{
+        viewModelScope.launch {
+            links = database.getAllLinks()
+
+            Log.d("Main","Entered init ")
+
+            linkString = Transformations.map(links) { links ->
+                formatLinks(links, application.resources)
+            }
+        }
     }
+
 
     fun onClear() {
         viewModelScope.launch {
@@ -29,18 +42,4 @@ class HistoryViewModel(
     private suspend fun clear() {
         database.clear()
     }
-
-    fun insertNew(url: String) {
-        viewModelScope.launch {
-            val linkSave = LinkSave()
-            linkSave.linkURL
-            insert(linkSave)
-        }
-    }
-
-    private suspend fun insert(linkSave: LinkSave) {
-        database.insert(linkSave)
-    }
-
-
 }

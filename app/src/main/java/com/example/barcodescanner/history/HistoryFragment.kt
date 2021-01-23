@@ -26,6 +26,7 @@ class HistoryFragment : Fragment() {
             .getInstance(application)
             .linkDatabaseDao
 
+
         val viewModelFactory = HistoryViewModelFactory(dataSource, application)
 
         val historyViewModel =
@@ -33,6 +34,8 @@ class HistoryFragment : Fragment() {
                 this, viewModelFactory
             ).get(HistoryViewModel::class.java)
         binding.historyViewModel = historyViewModel
+
+
         return binding.root
     }
 
