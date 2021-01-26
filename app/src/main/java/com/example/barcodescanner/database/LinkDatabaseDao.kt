@@ -27,6 +27,6 @@ interface LinkDatabaseDao {
     suspend fun insert(link: LinkSave)
     @Query("DELETE FROM links_table")
     suspend fun clear()
-    @Query("SELECT * FROM links_table")
+    @Query("SELECT * FROM links_table ORDER BY ID DESC")
     suspend fun getAllLinks(): List<LinkSave>
 }
