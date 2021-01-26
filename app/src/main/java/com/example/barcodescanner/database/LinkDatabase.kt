@@ -39,7 +39,7 @@ abstract class LinkDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         LinkDatabase::class.java,
-                        "links_table"
+                        "link_database"
                     )
                         .fallbackToDestructiveMigration()
                         .build()

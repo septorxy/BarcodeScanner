@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,7 +14,7 @@ import com.example.barcodescanner.databinding.FragmentHistoryBinding
 
 
 class HistoryFragment : Fragment() {
-
+    lateinit var txt: TextView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,14 +26,14 @@ class HistoryFragment : Fragment() {
         val dataSource = LinkDatabase
             .getInstance(application)
             .linkDatabaseDao
-
+        txt = binding.textview;
 
         val viewModelFactory = HistoryViewModelFactory(dataSource, application)
 
         val historyViewModel =
             ViewModelProvider(
-                this, viewModelFactory
-            ).get(HistoryViewModel::class.java)
+                this, viewModelFactory).get(HistoryViewModel::class.java)
+
         binding.historyViewModel = historyViewModel
 
 

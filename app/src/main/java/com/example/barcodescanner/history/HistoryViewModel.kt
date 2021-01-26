@@ -1,11 +1,9 @@
 package com.example.barcodescanner.history
 
 import android.app.Application
-import android.text.Spanned
-import android.util.Log
+import android.text.Html
+import androidx.core.text.HtmlCompat
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.viewModelScope
 import com.example.barcodescanner.database.LinkDatabaseDao
 import com.example.barcodescanner.database.LinkSave
@@ -17,18 +15,18 @@ class HistoryViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
-    lateinit var links: LiveData<List<LinkSave>>
-    lateinit var linkString: LiveData<Spanned>
-
-    init{
+    lateinit var links: List<LinkSave>
+    var linkString = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+        Html.fromHtml("", Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        HtmlCompat.fromHtml("", HtmlCompat.FROM_HTML_MODE_LEGACY)
+    }
+    
+    init {
         viewModelScope.launch {
-            links = database.getAllLinks()
-
-            Log.d("Main","Entered init ")
-
-            linkString = Transformations.map(links) { links ->
-                formatLinks(links, application.resources)
-            }
+                links = database.getAllLinks()
+                linkString = formatLinks(links, application.resources)
+                //TODO NOT UPDATING<----
         }
     }
 

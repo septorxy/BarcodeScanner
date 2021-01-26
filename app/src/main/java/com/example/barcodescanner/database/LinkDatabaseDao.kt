@@ -16,7 +16,6 @@
 
 package com.example.barcodescanner.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -26,11 +25,8 @@ import androidx.room.Query
 interface LinkDatabaseDao {
     @Insert
     suspend fun insert(link: LinkSave)
-
     @Query("DELETE FROM links_table")
     suspend fun clear()
-
     @Query("SELECT * FROM links_table")
-    fun getAllLinks(): LiveData<List<LinkSave>>
-
+    suspend fun getAllLinks(): List<LinkSave>
 }

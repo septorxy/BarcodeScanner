@@ -22,7 +22,7 @@ class MainViewModel(
             }
             Log.d("Main", "insertNew Entered")
         }
-        //change
+
     }
 
     private suspend fun insert(linkSave: LinkSave) {
