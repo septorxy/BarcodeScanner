@@ -2,6 +2,7 @@ package com.example.barcodescanner.history
 
 import android.app.Application
 import android.text.Html
+import android.text.Spanned
 import androidx.core.text.HtmlCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,13 +17,13 @@ class HistoryViewModel(
 ) : AndroidViewModel(application) {
 
     lateinit var links: List<LinkSave>
-    var linkString = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-        Html.fromHtml("", Html.FROM_HTML_MODE_LEGACY)
-    } else {
-        HtmlCompat.fromHtml("", HtmlCompat.FROM_HTML_MODE_LEGACY)
-    }
-    
+    lateinit var linkString: Spanned
     init {
+        linkString = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            Html.fromHtml("", Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            HtmlCompat.fromHtml("", HtmlCompat.FROM_HTML_MODE_LEGACY)
+        }
         viewModelScope.launch {
                 links = database.getAllLinks()
                 linkString = formatLinks(links, application.resources)
@@ -40,4 +41,5 @@ class HistoryViewModel(
     private suspend fun clear() {
         database.clear()
     }
+
 }
