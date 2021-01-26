@@ -36,20 +36,21 @@ class HistoryViewModel(
         viewModelScope.launch {
                 links = database.getAllLinks()
                 _linkString.value = formatLinks(links, application.resources)
-                //TODO NOT UPDATING<----
+
         }
 
     }
 
-
     fun onClear() {
         viewModelScope.launch {
             clear()
+
         }
     }
 
     private suspend fun clear() {
         database.clear()
+
     }
 
 }

@@ -19,7 +19,7 @@ fun formatLinks(links: List<LinkSave>, resources: Resources): Spanned {
             append("<br>")
             append(resources.getString(R.string.time))
             append("\t${convertLongToDateString(it.timeScanned)}<br>")
-            append("\t${it.linkURL}<br>")
+            append("\t<a href='${it.linkURL}'>${it.linkURL}</a><br>")
         }
     }
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

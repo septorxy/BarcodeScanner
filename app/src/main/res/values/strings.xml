@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">BarcodeScanner</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="barcode_text">Barcode Text</string>
     <string name="about">About</string>
@@ -10,4 +9,5 @@
     <string name="title"><![CDATA[<h3>Your past scanned links can be found here</h3>]]></string>
     <string name="time"><![CDATA[<b>Date Scanned:</b>]]></string>
     <string name="clear">Clear</string>
+    <string name="singleLink"><a href='%1$s'>%1$s</a></string>
 </resources>
