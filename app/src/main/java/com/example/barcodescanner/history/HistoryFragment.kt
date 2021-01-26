@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.barcodescanner.R
 import com.example.barcodescanner.database.LinkDatabase
@@ -28,6 +29,7 @@ class HistoryFragment : Fragment() {
             .linkDatabaseDao
         txt = binding.textview;
 
+
         val viewModelFactory = HistoryViewModelFactory(dataSource, application)
 
         val historyViewModel =
@@ -35,7 +37,9 @@ class HistoryFragment : Fragment() {
                 this, viewModelFactory).get(HistoryViewModel::class.java)
 
         binding.historyViewModel = historyViewModel
-
+        historyViewModel.linkString.observe(viewLifecycleOwner, Observer { newLinkString ->
+            binding.textview.text = newLinkString
+        })
 
         return binding.root
     }
