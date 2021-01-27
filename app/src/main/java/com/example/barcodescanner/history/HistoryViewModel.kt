@@ -44,7 +44,11 @@ class HistoryViewModel(
     fun onClear() {
         viewModelScope.launch {
             clear()
-
+            _linkString.value = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                Html.fromHtml("<h3>Your past scanned links can be found here</h3>", Html.FROM_HTML_MODE_LEGACY)
+            } else {
+                HtmlCompat.fromHtml("<h3>Your past scanned links can be found here</h3>", HtmlCompat.FROM_HTML_MODE_LEGACY)
+            }
         }
     }
 

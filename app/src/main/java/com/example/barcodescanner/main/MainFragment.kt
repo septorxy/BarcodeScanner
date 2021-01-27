@@ -2,10 +2,13 @@ package com.example.barcodescanner.main
 
 import android.app.Application
 import android.os.Bundle
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.text.HtmlCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -36,7 +39,7 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         Log.d("Main", "onCreateView")
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentMainBinding>(
@@ -52,6 +55,8 @@ class MainFragment : Fragment() {
 
         btnBarcode = binding.button
         txt = binding.txtContent
+
+        txt.movementMethod = LinkMovementMethod.getInstance()
 
         btnBarcode.setOnClickListener {
             val intentIntegrator = IntentIntegrator(this.activity)
@@ -86,9 +91,15 @@ class MainFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        txt.text = mi!!.getResults()
-        val str = txt.text.toString()
+        val text = "<a href='${mi!!.getResults()}'>${mi!!.getResults()}</a>"
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            txt.text = Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY)
+        } else {
+            txt.text = HtmlCompat.fromHtml(text, HtmlCompat.FROM_HTML_MODE_LEGACY)
+        }
+        val str = mi!!.getResults()
         MainViewModel(dataSource, application).insertNew(str)
+        mi!!.setResults("")
     }
 
 
